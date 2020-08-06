@@ -1,0 +1,32 @@
+{
+  "name": "myrepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll --passWithNoTests",
+    "lint": "find . -path ./node_modules -prune -o -path ./build -prune -o -type f \\( -iname \\*\\.ts -o -iname \\*.tsx -o -iname \\*.js -o -iname \\*\\.jsx \\) -print | xargs -I{} npx eslint {}",
+    "lintFix": "find . -path ./node_modules -prune -o -path ./build -prune -o -type f \\( -iname \\*\\.ts -o -iname \\*.tsx -o -iname \\*.js -o -iname \\*\\.jsx \\) -print | xargs -I{} npx eslint --fix {}",
+    "dev:build:server": "npx webpack --config webpack.server.js --watch",
+    "dev:server": "nodemon --watch build --exec \"node build/bundle.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "eslint-plugin-react": "^7.20.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "eslint": "^7.6.0"
+  }
+}
