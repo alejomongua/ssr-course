@@ -9,9 +9,7 @@ function Home() {
   )
 }
 
-Home.propTypes = {
-
+export default {
+  component: Home
 }
-
-export default Home
 
