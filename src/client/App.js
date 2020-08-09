@@ -9,7 +9,9 @@ class App extends Component {
     return (
       <div>
         <Header />
-        {renderRoutes(this.props.route.routes)}
+        <main className="container">
+          {renderRoutes(this.props.route.routes)}
+        </main>
       </div>
     )
   }

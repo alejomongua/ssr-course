@@ -6,10 +6,10 @@ import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import serialize from 'serialize-javascript'
 
-export default (req, store) => {
+export default (req, store, context) => {
   const content = renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.path}>
+      <StaticRouter location={req.path} context={context}>
         {renderRoutes(routes)}
       </StaticRouter>
     </Provider>
@@ -22,9 +22,7 @@ export default (req, store) => {
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
       </head>
       <body>
-        <main class='container'>
-          <div id='root'>${content}</div>
-        </main>
+        <div id='root'>${content}</div>
         <script>
         window.INITIAL_STATE = ${serialize(store.getState())}
         </script>

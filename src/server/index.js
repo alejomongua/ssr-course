@@ -22,11 +22,33 @@ app.get('*', async (req, res) => {
 
   const promises = matchRoutes(routes, req.path).map(
     ({route}) => (
-      route.loadData ? route.loadData(store) : null
+      route.loadData
+        ? route.loadData(store)
+        : null
+    )
+  ).map(
+    promise => (
+      promise ? new Promise((resolve) => {
+        promise.then(resolve).catch(resolve)
+      }) : null
     )
   )
 
-  Promise.all(promises).then(() => res.send(renderer(req, store)))
+  const render = () => {
+    let context = {}
+    const renderedPage = renderer(req, store, context)
+
+    if (context.url) {
+      return res.redirect(301, '/')
+    }
+    if (context.notFound) {
+      res.status(404)
+    }
+
+    res.send(renderedPage)
+  }
+
+  Promise.all(promises).then(render)
 })
 
 app.listen(3000, () => {

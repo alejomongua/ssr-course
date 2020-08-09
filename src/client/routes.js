@@ -1,6 +1,8 @@
 import home from './pages/HomePage'
 import users from './pages/UsersPage'
+import admins from './pages/AdminsPage'
 import app from './App'
+import notFound from './pages/NotFoundPage'
 
 const routes = [
   {
@@ -14,6 +16,13 @@ const routes = [
       {
         ...users,
         path: '/users',
+      },
+      {
+        ...admins,
+        path: '/admins',
+      },
+      {
+        ...notFound,
       }
     ]
   },
